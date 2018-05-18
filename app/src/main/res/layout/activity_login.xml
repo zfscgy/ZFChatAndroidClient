@@ -7,25 +7,28 @@
     tools:context="com.zfscgy.zfchat.zfchat.LoginActivity">
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="215dp"
-        android:layout_height="45dp"
+        android:id="@+id/editText_serverIP"
+        android:layout_width="157dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textUri"
-        android:text=""
+        android:text="116.85.54.118"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_connect"
         android:layout_width="100dp"
         android:layout_height="48dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="ButtonConnect"
         android:text="@string/connect"
-        app:layout_constraintLeft_toRightOf="@+id/editText"
+        app:layout_constraintLeft_toRightOf="@+id/editText_serverPort"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -36,7 +39,7 @@
         android:text="@string/unconnected"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editText_serverIP"
         android:layout_marginStart="8dp" />
 
     <EditText
@@ -65,14 +68,15 @@
         android:id="@+id/button2"
         android:layout_width="88dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="ButtonSignUp"
         android:text="@string/sign_up"
         app:layout_constraintHorizontal_bias="0.264"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/editText_password"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="80dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_password" />
 
     <Button
         android:id="@+id/button3"
@@ -81,7 +85,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="8dp"
-        android:onClick="ButtonToMain"
+        android:onClick="ButtonSignIn"
         android:text="@string/sign_in"
         app:layout_constraintHorizontal_bias="0.742"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -97,7 +101,8 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText_username"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -109,5 +114,26 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_username" />
+
+    <EditText
+        android:id="@+id/editText_serverPort"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="5050"
+        app:layout_constraintLeft_toRightOf="@+id/editText_serverIP"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="344dp"
+        android:layout_height="0dp"
+        android:text="@string/app_info"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp" />
 
 </android.support.constraint.ConstraintLayout>

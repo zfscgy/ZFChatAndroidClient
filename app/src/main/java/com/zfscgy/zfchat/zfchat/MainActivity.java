@@ -11,7 +11,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     FragmentChat fragmentChat = new FragmentChat();
     FragmentPeople fragmentPeople = new FragmentPeople();
-
+    FragmentFinding fragmentFinding = new FragmentFinding();
+    ZFChatApplication zfChatApplication;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -23,9 +24,12 @@ public class MainActivity extends AppCompatActivity {
                     getFragmentManager().beginTransaction().replace(R.id.main_frame, fragmentChat).commit();
                     return true;
                 case R.id.navigation_contactor:
+                    setTitle("Contacters");
                     getFragmentManager().beginTransaction().replace(R.id.main_frame, fragmentPeople).commit();
                     return true;
                 case R.id.navigation_find:
+                    setTitle("Find");
+                    getFragmentManager().beginTransaction().replace(R.id.main_frame, fragmentFinding).commit();
                     return true;
             }
             return false;
@@ -33,13 +37,22 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        zfChatApplication = (ZFChatApplication)getApplication();
+        zfChatApplication.SetPeopleFrament(fragmentPeople);
+        zfChatApplication.SetChatFragment(fragmentChat);
+        zfChatApplication.SetFindingFragment(fragmentFinding);
+        fragmentPeople.SetZFChatApplication(zfChatApplication);
+        fragmentChat.SetZFChatApplication(zfChatApplication);
+        fragmentFinding.SetZFChatApplication(zfChatApplication);
+        setTitle("Chat");
+        getFragmentManager().beginTransaction().replace(R.id.main_frame, fragmentChat).commit();
     }
 
 }

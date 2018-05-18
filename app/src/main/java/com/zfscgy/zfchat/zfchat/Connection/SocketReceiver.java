@@ -55,6 +55,10 @@ public class SocketReceiver implements Runnable
     }
     public void run()
     {
+        if(!socket.isConnected())
+        {
+            return;
+        }
         try
         {
             inputStream = socket.getInputStream();
@@ -72,15 +76,25 @@ public class SocketReceiver implements Runnable
             try
             {
                 len = inputStream.read(receiveBuffer);
+                if(len == -1)
+                {
+                    //It means the socket is closed
+                    Log.e("Socket", "Closed");
+                    break;
+                }
             }
-            catch (Exception e)
-            {
-                Log.e("error in loop:",e.getMessage());
+            catch (Exception e) {
+                Log.e("error in loop:", e.getMessage());
                 continue;
             }
-            byte[] receivedBytes = new byte[len];
-            Arrays.copyOfRange(receiveBuffer,0,len);
-            handler.sendMessage(Message.obtain(handler, 0, receivedBytes));
+            int startIndex = 0;
+            while(startIndex < len)
+            {
+                byte[] receivedBytes = new byte[(int)(256 * receiveBuffer[startIndex + 1] + receiveBuffer[startIndex + 2])];
+                receivedBytes = Arrays.copyOfRange(receiveBuffer,startIndex, startIndex + receivedBytes.length);  //notice it is from ... to
+                handler.sendMessage(Message.obtain(handler, 0, receivedBytes));
+                startIndex += receivedBytes.length;
+            }
         }
     }
 }
